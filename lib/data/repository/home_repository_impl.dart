@@ -3,16 +3,16 @@
 import 'package:simple_application/domain/entity/pagination_entity.dart';
 import 'package:simple_application/domain/repository/pagination_repository.dart';
 
-import '../datasource/remote/pagination_api_service.dart';
+import '../datasource/remote/home_data_source.dart';
 
-class PaginationRepositoryImpl implements PaginationRepository {
+class HomeRepositoryImpl implements HomeRepository {
 
-  final PaginationApiService _apiService = PaginationApiService();
+  final HomeDataSource _dataSource = HomeDataSource();
 
 
   @override
   Future<List<PaginationEntity>> getPagination({int? page, int? size}) {
-    return _apiService.getPagination(page: page,size: size);
+    return _dataSource.getPagination(page: page,size: size);
   }
 
 }

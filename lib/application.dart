@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'common/di/injector.dart';
-import 'common/navigator/navigation.dart';
-import 'common/navigator/router_observer.dart';
+import 'common/navigator/navigation/navigation.dart';
+import 'common/navigator/router/app_router.dart';
+import 'common/navigator/router/router_module.dart';
 
 class Application extends StatefulWidget {
   const Application({Key? key}) : super(key: key);
@@ -15,7 +15,6 @@ class ApplicationState extends State<Application> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorObservers: [sl.get<AppRouteObserver>()],
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       builder: (context, child) {

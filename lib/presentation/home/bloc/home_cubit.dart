@@ -3,10 +3,10 @@ import '../../../common/di/injector.dart';
 import '../../../domain/repository/pagination_repository.dart';
 import 'home_state.dart';
 
-class HomeBloc extends Cubit<HomeState> {
-  final PaginationRepository _repository = sl.get();
+class HomeCubit extends Cubit<HomeState> {
+  final HomeRepository _repository = sl.get();
 
-  HomeBloc() : super(const HomeState.loading()) {
+  HomeCubit() : super(const HomeState.loading()) {
     init();
   }
 
@@ -17,7 +17,6 @@ class HomeBloc extends Cubit<HomeState> {
       emit(HomeState(
           data: data,
           page: 0,
-          isLoadMore: false,
           canLoadMore: data.length == 10));
     } catch (err) {
       emit(HomeState.error(err));
@@ -25,18 +24,19 @@ class HomeBloc extends Cubit<HomeState> {
   }
 
   void loadMore() {
-    try {
-      state.mapOrNull((value) async {
-        emit(value.copyWith(isLoadMore: true));
+    state.mapOrNull((value) async {
+      try {
+        emit(value.copyWith(loadMoreError: false));
         final data = await _repository.getPagination(page: value.page + 1);
         emit(value.copyWith(
             data: [...value.data, ...data],
             page: value.page + 1,
-            isLoadMore: false,
+            loadMoreError: false,
             canLoadMore: data.length == 10));
-      });
-    } catch (err) {
-      emit(HomeState.error(err));
-    }
+      } catch (err) {
+        emit(value.copyWith(loadMoreError: true));
+      }
+    });
+
   }
 }

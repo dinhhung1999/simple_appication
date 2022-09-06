@@ -5,13 +5,13 @@ part 'pagination_dto.g.dart';
 @JsonSerializable()
 class PaginationDto extends PaginationEntity {
   @override
-  final String content;
+  final String? content;
 
   @override
-  final int id;
+  final int? id;
 
   @override
-  final String title;
+  final String? title;
 
   PaginationDto(this.content, this.id, this.title);
 

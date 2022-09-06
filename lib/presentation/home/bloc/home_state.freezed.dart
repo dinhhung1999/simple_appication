@@ -18,8 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<PaginationEntity> data, int page, bool isLoadMore,
-            bool canLoadMore)
+    TResult Function(List<PaginationEntity> data, int page, bool canLoadMore,
+            bool? loadMoreError)
         $default, {
     required TResult Function() loading,
     required TResult Function(dynamic error) error,
@@ -27,8 +27,8 @@ mixin _$HomeState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(List<PaginationEntity> data, int page, bool isLoadMore,
-            bool canLoadMore)?
+    TResult Function(List<PaginationEntity> data, int page, bool canLoadMore,
+            bool? loadMoreError)?
         $default, {
     TResult Function()? loading,
     TResult Function(dynamic error)? error,
@@ -36,8 +36,8 @@ mixin _$HomeState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<PaginationEntity> data, int page, bool isLoadMore,
-            bool canLoadMore)?
+    TResult Function(List<PaginationEntity> data, int page, bool canLoadMore,
+            bool? loadMoreError)?
         $default, {
     TResult Function()? loading,
     TResult Function(dynamic error)? error,
@@ -91,8 +91,8 @@ abstract class _$$HomeStateDataCopyWith<$Res> {
   $Res call(
       {List<PaginationEntity> data,
       int page,
-      bool isLoadMore,
-      bool canLoadMore});
+      bool canLoadMore,
+      bool? loadMoreError});
 }
 
 /// @nodoc
@@ -109,8 +109,8 @@ class __$$HomeStateDataCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
   $Res call({
     Object? data = freezed,
     Object? page = freezed,
-    Object? isLoadMore = freezed,
     Object? canLoadMore = freezed,
+    Object? loadMoreError = freezed,
   }) {
     return _then(_$HomeStateData(
       data: data == freezed
@@ -121,14 +121,14 @@ class __$$HomeStateDataCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
-      isLoadMore: isLoadMore == freezed
-          ? _value.isLoadMore
-          : isLoadMore // ignore: cast_nullable_to_non_nullable
-              as bool,
       canLoadMore: canLoadMore == freezed
           ? _value.canLoadMore
           : canLoadMore // ignore: cast_nullable_to_non_nullable
               as bool,
+      loadMoreError: loadMoreError == freezed
+          ? _value.loadMoreError
+          : loadMoreError // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -139,8 +139,8 @@ class _$HomeStateData implements HomeStateData {
   const _$HomeStateData(
       {required final List<PaginationEntity> data,
       required this.page,
-      required this.isLoadMore,
-      required this.canLoadMore})
+      required this.canLoadMore,
+      this.loadMoreError})
       : _data = data;
 
   final List<PaginationEntity> _data;
@@ -153,13 +153,13 @@ class _$HomeStateData implements HomeStateData {
   @override
   final int page;
   @override
-  final bool isLoadMore;
-  @override
   final bool canLoadMore;
+  @override
+  final bool? loadMoreError;
 
   @override
   String toString() {
-    return 'HomeState(data: $data, page: $page, isLoadMore: $isLoadMore, canLoadMore: $canLoadMore)';
+    return 'HomeState(data: $data, page: $page, canLoadMore: $canLoadMore, loadMoreError: $loadMoreError)';
   }
 
   @override
@@ -170,9 +170,9 @@ class _$HomeStateData implements HomeStateData {
             const DeepCollectionEquality().equals(other._data, _data) &&
             const DeepCollectionEquality().equals(other.page, page) &&
             const DeepCollectionEquality()
-                .equals(other.isLoadMore, isLoadMore) &&
+                .equals(other.canLoadMore, canLoadMore) &&
             const DeepCollectionEquality()
-                .equals(other.canLoadMore, canLoadMore));
+                .equals(other.loadMoreError, loadMoreError));
   }
 
   @override
@@ -180,8 +180,8 @@ class _$HomeStateData implements HomeStateData {
       runtimeType,
       const DeepCollectionEquality().hash(_data),
       const DeepCollectionEquality().hash(page),
-      const DeepCollectionEquality().hash(isLoadMore),
-      const DeepCollectionEquality().hash(canLoadMore));
+      const DeepCollectionEquality().hash(canLoadMore),
+      const DeepCollectionEquality().hash(loadMoreError));
 
   @JsonKey(ignore: true)
   @override
@@ -191,39 +191,39 @@ class _$HomeStateData implements HomeStateData {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<PaginationEntity> data, int page, bool isLoadMore,
-            bool canLoadMore)
+    TResult Function(List<PaginationEntity> data, int page, bool canLoadMore,
+            bool? loadMoreError)
         $default, {
     required TResult Function() loading,
     required TResult Function(dynamic error) error,
   }) {
-    return $default(data, page, isLoadMore, canLoadMore);
+    return $default(data, page, canLoadMore, loadMoreError);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(List<PaginationEntity> data, int page, bool isLoadMore,
-            bool canLoadMore)?
+    TResult Function(List<PaginationEntity> data, int page, bool canLoadMore,
+            bool? loadMoreError)?
         $default, {
     TResult Function()? loading,
     TResult Function(dynamic error)? error,
   }) {
-    return $default?.call(data, page, isLoadMore, canLoadMore);
+    return $default?.call(data, page, canLoadMore, loadMoreError);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<PaginationEntity> data, int page, bool isLoadMore,
-            bool canLoadMore)?
+    TResult Function(List<PaginationEntity> data, int page, bool canLoadMore,
+            bool? loadMoreError)?
         $default, {
     TResult Function()? loading,
     TResult Function(dynamic error)? error,
     required TResult orElse(),
   }) {
     if ($default != null) {
-      return $default(data, page, isLoadMore, canLoadMore);
+      return $default(data, page, canLoadMore, loadMoreError);
     }
     return orElse();
   }
@@ -267,13 +267,13 @@ abstract class HomeStateData implements HomeState {
   const factory HomeStateData(
       {required final List<PaginationEntity> data,
       required final int page,
-      required final bool isLoadMore,
-      required final bool canLoadMore}) = _$HomeStateData;
+      required final bool canLoadMore,
+      final bool? loadMoreError}) = _$HomeStateData;
 
   List<PaginationEntity> get data;
   int get page;
-  bool get isLoadMore;
   bool get canLoadMore;
+  bool? get loadMoreError;
   @JsonKey(ignore: true)
   _$$HomeStateDataCopyWith<_$HomeStateData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -320,8 +320,8 @@ class _$HomeStateLoading implements HomeStateLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<PaginationEntity> data, int page, bool isLoadMore,
-            bool canLoadMore)
+    TResult Function(List<PaginationEntity> data, int page, bool canLoadMore,
+            bool? loadMoreError)
         $default, {
     required TResult Function() loading,
     required TResult Function(dynamic error) error,
@@ -332,8 +332,8 @@ class _$HomeStateLoading implements HomeStateLoading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(List<PaginationEntity> data, int page, bool isLoadMore,
-            bool canLoadMore)?
+    TResult Function(List<PaginationEntity> data, int page, bool canLoadMore,
+            bool? loadMoreError)?
         $default, {
     TResult Function()? loading,
     TResult Function(dynamic error)? error,
@@ -344,8 +344,8 @@ class _$HomeStateLoading implements HomeStateLoading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<PaginationEntity> data, int page, bool isLoadMore,
-            bool canLoadMore)?
+    TResult Function(List<PaginationEntity> data, int page, bool canLoadMore,
+            bool? loadMoreError)?
         $default, {
     TResult Function()? loading,
     TResult Function(dynamic error)? error,
@@ -460,8 +460,8 @@ class _$HomeStateError implements HomeStateError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<PaginationEntity> data, int page, bool isLoadMore,
-            bool canLoadMore)
+    TResult Function(List<PaginationEntity> data, int page, bool canLoadMore,
+            bool? loadMoreError)
         $default, {
     required TResult Function() loading,
     required TResult Function(dynamic error) error,
@@ -472,8 +472,8 @@ class _$HomeStateError implements HomeStateError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult Function(List<PaginationEntity> data, int page, bool isLoadMore,
-            bool canLoadMore)?
+    TResult Function(List<PaginationEntity> data, int page, bool canLoadMore,
+            bool? loadMoreError)?
         $default, {
     TResult Function()? loading,
     TResult Function(dynamic error)? error,
@@ -484,8 +484,8 @@ class _$HomeStateError implements HomeStateError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<PaginationEntity> data, int page, bool isLoadMore,
-            bool canLoadMore)?
+    TResult Function(List<PaginationEntity> data, int page, bool canLoadMore,
+            bool? loadMoreError)?
         $default, {
     TResult Function()? loading,
     TResult Function(dynamic error)? error,

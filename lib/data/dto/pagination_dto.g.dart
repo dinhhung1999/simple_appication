@@ -8,9 +8,9 @@ part of 'pagination_dto.dart';
 
 PaginationDto _$PaginationDtoFromJson(Map<String, dynamic> json) =>
     PaginationDto(
-      json['content'] as String,
-      json['id'] as int,
-      json['title'] as String,
+      json['content'] as String?,
+      json['id'] as int?,
+      json['title'] as String?,
     );
 
 Map<String, dynamic> _$PaginationDtoToJson(PaginationDto instance) =>

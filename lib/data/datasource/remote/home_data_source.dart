@@ -4,7 +4,7 @@ import 'package:simple_application/domain/entity/pagination_entity.dart';
 
 import '../../dto/pagination_dto.dart';
 
-class PaginationApiService extends BaseApiService {
+class HomeDataSource extends BaseApiService {
   Future<List<PaginationEntity>> getPagination({int? page, int? size}) async {
     try {
       /// used to implement pagination logic

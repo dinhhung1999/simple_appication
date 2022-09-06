@@ -39,8 +39,8 @@ class ItemWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 kSpacingHeight4,
-                Text(data.title,style: const TextStyle(fontSize: 18)),
-                Text(data.content),
+                Text(data.title??'',style: const TextStyle(fontSize: 18)),
+                Text(data.content??''),
                 kSpacingHeight4,
               ],
             ),
